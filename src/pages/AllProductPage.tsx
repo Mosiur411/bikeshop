@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ProductCard from "@/components/ProductCard";
 import { useGetProductsQuery } from "@/feature/products/productSlice";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 // Types
 interface Product {
@@ -29,8 +29,7 @@ export default function AllProductPage() {
         return products;
     }
   };
-
-  const sortedProducts = response?.data ? sortProducts(response.data) : [];
+  const sortedProducts = useMemo(() => response?.data ? sortProducts(response?.data) : [], [response, isLoading, error])
 
   // Loading skeleton component
   const LoadingSkeleton = () => (

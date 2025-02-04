@@ -1,7 +1,6 @@
 import App from "@/App";
 import About from "@/pages/AboutPage";
 import Home from "@/pages/HomePage";
-import Tasks from "@/pages/tasks";
 import { createBrowserRouter } from 'react-router-dom';
 // import { createBrowserRouter } from "react-router";
 
@@ -22,10 +21,7 @@ const routes = createBrowserRouter([
         path: '/about',
         element: <About />
       },
-      {
-        path: '/tasks',
-        element: <Tasks />
-      }
+     
     ]
   },
 ])

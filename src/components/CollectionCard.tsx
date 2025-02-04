@@ -1,7 +1,6 @@
 import collection1 from '../assets/bookCollection1.png'
 import collection2 from '../assets/bookCollection4.png'
 import collection3 from '../assets/bookCollection3.png'
-import { Link } from 'react-router-dom';
 
 interface Collection {
   id: number;

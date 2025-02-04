@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import CollectionCard from "@/components/CollectionCard";
 import ProductCard from "@/components/ProductCard";
-import { useGetProductsQuery } from "@/feature/products/productSlice";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
+import { useGetProductsQuery } from "@/feature/products/productSlice";
 
 interface Product {
   _id: string;

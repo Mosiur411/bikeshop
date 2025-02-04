@@ -3,15 +3,15 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../feature/cart/cartSlice';
 
 interface Product {
-  _id: string;
-  title: string;
-  author: string;
-  category: string;
-  description: string;
-  image: string;
-  inStock: boolean;
-  price: number;
-  quantity: number;
+  _id?: string;
+  title?: string;
+  author?: string;
+  category?: string;
+  description?: string;
+  image?: string;
+  inStock?: boolean;
+  price?: number;
+  quantity?: number;
 }
 
 interface ProductCardProps {
@@ -27,7 +27,8 @@ export default function ProductCard({ product }: ProductCardProps) {
       title: product.title,
       price: product.price,
       image: product.image,
-      quantity: 1
+      quantity: 1,
+      inStock:product?.inStock,
     }));
   };
 
