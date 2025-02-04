@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white w-full">
       {/* Newsletter Section */}
-      <div className="bg-gray-800 py-4 sm:py-6 lg:py-8">
+      {/* <div className="bg-gray-800 py-4 sm:py-6 lg:py-8">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
@@ -24,14 +24,14 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-8 sm:py-12 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="text-center sm:text-left">
-            <h2 className="text-xl font-bold mb-4">BoiToi</h2>
+            <h2 className="text-xl font-bold mb-4">Bike store</h2>
             <p className="text-gray-400 mb-4 text-sm sm:text-base">
               Your trusted destination for quality books and stationery products.
             </p>
@@ -80,7 +80,7 @@ export default function Footer() {
               <li>123 Book Street</li>
               <li>Dhaka, Bangladesh</li>
               <li>Phone: +880 1234-567890</li>
-              <li>Email: info@boitoi.com</li>
+              <li>Email: info@bikestore.com</li>
             </ul>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function Footer() {
         <div className="container mx-auto px-4 py-4 sm:py-6 max-w-7xl">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
-              © {new Date().getFullYear()} BoiToi. All rights reserved.
+              © {new Date().getFullYear()} Bike store. All rights reserved.
             </p>
             <div className="flex items-center justify-center space-x-2">
               <img src="/visa.png" alt="Visa" className="h-6 sm:h-8" />

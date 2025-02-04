@@ -3,16 +3,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useCallback } from 'react';
 import { FaChevronLeft, FaChevronRight, FaQuoteLeft } from 'react-icons/fa';
 
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  avatar: string;
-  content: string;
-  rating: number;
-}
-
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
     id: 1,
     name: "Sarah Johnson",
@@ -34,7 +25,7 @@ const testimonials: Testimonial[] = [
     name: "Emma Wilson",
     role: "Teacher",
     avatar: "https://randomuser.me/api/portraits/women/3.jpg",
-    content: "The variety of educational materials is impressive. recommended  educators.",
+    content: "The variety of educational materials is impressive. Highly recommended for educators.",
     rating: 5
   },
   {
@@ -55,73 +46,42 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-export default function TestimonialPage() {
+export default function TestimonialCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { 
-      loop: true,
-      align: 'start',
-      slidesToScroll: 1,
-    }, 
-    [Autoplay()]
+    { loop: true, align: 'center', slidesToScroll: 1 },
+    [Autoplay({ delay: 3000 })]
   );
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   return (
-    <div className="bg-gray-200 py-5 mb-10">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            What Our Customers Say
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Hear from our valued customers about their experiences shopping with us.
-          </p>
-        </div>
-
+    <section className="bg-gray-100 py-10">
+      <div className="container mx-auto px-6 text-center">
+        <h2 className="text-4xl font-bold text-gray-900 mb-6">Customer Testimonials</h2>
+        <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+          Hear from our valued customers about their experiences shopping with us.
+        </p>
         <div className="relative">
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex">
-              {testimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="embla__slide flex-[0_0_100%] min-w-0 pl-4 md:flex-[0_0_50%] lg:flex-[0_0_33.33%]"
-                >
-                  <div className="bg-white rounded-lg shadow-lg p-6 m-4 hover:shadow-xl transition-shadow duration-300">
-                    <div className="flex items-start mb-4">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        className="w-12 h-12 rounded-full object-cover mr-4"
-                      />
+              {testimonials.map(({ id, name, role, avatar, content, rating }) => (
+                <div key={id} className="embla__slide flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] p-4">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300">
+                    <div className="flex items-center mb-4">
+                      <img src={avatar} alt={name} className="w-12 h-12 rounded-full mr-4" />
                       <div>
-                        <h3 className="font-semibold text-gray-900">
-                          {testimonial.name}
-                        </h3>
-                        <p className="text-gray-600 text-sm">{testimonial.role}</p>
+                        <h3 className="font-semibold text-gray-900">{name}</h3>
+                        <p className="text-sm text-gray-600">{role}</p>
                       </div>
                     </div>
-
-                    <div className="mb-4">
-                      <FaQuoteLeft className="text-blue-500 mb-2" size={20} />
-                      <p className="text-gray-700">{testimonial.content}</p>
-                    </div>
-
-                    <div className="flex items-center">
+                    <FaQuoteLeft className="text-blue-500 mb-2" size={20} />
+                    <p className="text-gray-700 mb-4">{content}</p>
+                    <div className="flex">
                       {[...Array(5)].map((_, index) => (
                         <svg
                           key={index}
-                          className={`w-5 h-5 ${
-                            index < testimonial.rating 
-                              ? 'text-yellow-400' 
-                              : 'text-gray-300'
-                          }`}
+                          className={`w-5 h-5 ${index < rating ? 'text-yellow-400' : 'text-gray-300'}`}
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -134,22 +94,20 @@ export default function TestimonialPage() {
               ))}
             </div>
           </div>
-
           <button
             onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-200"
           >
             <FaChevronLeft className="text-gray-600" size={24} />
           </button>
-
           <button
             onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-200"
           >
             <FaChevronRight className="text-gray-600" size={24} />
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

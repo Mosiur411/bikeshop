@@ -28,7 +28,7 @@ interface AuthResponse {
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://assignment-3-gray-seven.vercel.app/api' 
+    baseUrl: 'https://assignment-4-server-blond.vercel.app/api' 
   }),
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({

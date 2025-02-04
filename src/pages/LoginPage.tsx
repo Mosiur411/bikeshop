@@ -17,8 +17,8 @@ export default function LoginPage() {
   const [login, { isLoading }] = useLoginMutation();
   
   const [formData, setFormData] = useState({
-    email: 'book@gmail.com',
-    password: '12345678',
+    email: '',
+    password: '',
   });
   const [error, setError] = useState('');
 

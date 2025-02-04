@@ -50,7 +50,7 @@ const Navbar = () => {
       <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between mx-auto max-w-[1350px]">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold text-gray-800">
-          <span className="text-blue-600">E-</span>Boitoi
+          <span className="text-blue-600">Bike</span>-Store
         </Link>
 
         {/* Search Bar */}

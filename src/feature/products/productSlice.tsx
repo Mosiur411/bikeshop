@@ -16,7 +16,7 @@ interface IProduct {
 export const productApiSlice = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://assignment-3-gray-seven.vercel.app/api/' 
+    baseUrl: 'https://assignment-4-server-blond.vercel.app/api/' 
   }),
   tagTypes: ['Product'],
   endpoints: (builder) => ({

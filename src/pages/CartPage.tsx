@@ -1,17 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrash, FaMinus, FaPlus } from 'react-icons/fa';
-import { useState } from 'react';
-import { 
-  selectCartItems, 
+import { useEffect, useState } from 'react';
+import {
+  selectCartItems,
   selectCartTotalAmount,
   incrementQuantity,
   decrementQuantity,
-  removeFromCart 
+  removeFromCart
 } from '@/feature/cart/cartSlice';
+import { useOrderCheckoutMutation } from '@/feature/order/orderSlice';
+import StripePaymentFrom from '@/components/stripe/StripePaymentFrom';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 
 export default function CartPage() {
+  const [stripePromise, setStripePromise] = useState(null)
+  const [clientSecret, setClientSecret] = useState('')
+
+  const [orderCheckout, { data: checkout, isLoading, isSuccess }] = useOrderCheckoutMutation()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
@@ -23,36 +31,25 @@ export default function CartPage() {
     setIsProcessing(true);
     setError('');
     const user = localStorage.getItem('email');
-    console.log(localStorage.getItem('token'));
 
     try {
       if (!user) {
         navigate('/login');
         return;
       }
-
-      const response = await fetch('https://assignment-3-gray-seven.vercel.app/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          cartItems: cartItems,
-          customer: JSON.parse(user)
-        })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Checkout failed');
+      const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+      const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      const checkoutData = {
+        email: user,
+        products: cartItems.map(item => ({
+          product: item.id, 
+          quantity: item.quantity,
+          price: item.price
+        })),
+        totalItems: totalQuantity,
+        totalPrice: totalPrice,
       }
-
-      // Redirect to payment URL if provided
-      if (data.url) {
-        window.location.href = data.url;
-      }
+      await orderCheckout(checkoutData)
 
     } catch (err) {
       console.error('Checkout error:', err);
@@ -61,6 +58,13 @@ export default function CartPage() {
       setIsProcessing(false);
     }
   };
+
+  useEffect(() => {
+    setStripePromise(loadStripe('pk_test_51L1wwjDAYSz72lr1nWsB0uKFEeZD8Fsn8DJsi1GnCoBa3Tcwcyx8pKA9bFiocuR31NlbpOgeOs8nriYtWVKH8M8l00OFtQIs4F'))
+    setClientSecret(checkout?.data?.paymentIntent?.client_secret)
+  }, [isLoading, isSuccess, checkout]);
+
+
 
   if (cartItems.length === 0) {
     return (
@@ -77,12 +81,31 @@ export default function CartPage() {
       </div>
     );
   }
+  if (checkout?.success) {
+    return (
+
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full bg-white rounded-xl shadow-md p-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900">Stipe Paymnet Method</h2>
+            <p className="mt-2 text-sm text-gray-600">Join our community today</p>
+          </div>
+          <>
+            {clientSecret && stripePromise && <Elements
+              stripe={stripePromise} options={{ clientSecret }}>
+              <StripePaymentFrom  orderData={checkout?.data?.result}/>
+            </Elements>}
+          </>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
+
       <div className="container mx-auto px-4">
         <h1 className="text-2xl font-bold mb-8">Shopping Cart</h1>
-        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2">
@@ -94,11 +117,11 @@ export default function CartPage() {
                     alt={item.title}
                     className="w-24 h-24 object-cover rounded-md"
                   />
-                  
+
                   <div className="flex-grow">
                     <h3 className="font-semibold">{item.title}</h3>
                     <p className="text-gray-600">৳{item.price}</p>
-                    
+
                     <div className="flex items-center gap-4 mt-2">
                       <div className="flex items-center border rounded-md">
                         <button
@@ -115,7 +138,7 @@ export default function CartPage() {
                           <FaPlus className="w-4 h-4" />
                         </button>
                       </div>
-                      
+
                       <button
                         onClick={() => dispatch(removeFromCart(item.id))}
                         className="text-red-500 hover:text-red-700"
@@ -124,7 +147,7 @@ export default function CartPage() {
                       </button>
                     </div>
                   </div>
-                  
+
                   <div className="text-right">
                     <p className="font-semibold">৳{item.price * item.quantity}</p>
                   </div>
@@ -137,7 +160,7 @@ export default function CartPage() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-              
+
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
@@ -160,19 +183,19 @@ export default function CartPage() {
                   <p className="text-red-700">{error}</p>
                 </div>
               )}
-              
+
               <button
                 onClick={handleCheckout}
                 disabled={isProcessing || cartItems.length === 0}
                 className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md 
-                  ${isProcessing || cartItems.length === 0 
-                    ? 'opacity-50 cursor-not-allowed' 
+                  ${isProcessing || cartItems.length === 0
+                    ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-blue-700'} 
                   transition-colors`}
               >
                 {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
               </button>
-              
+
               <Link
                 to="/products"
                 className="block text-center text-blue-600 hover:text-blue-800 mt-4"

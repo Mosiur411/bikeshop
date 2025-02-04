@@ -1,12 +1,9 @@
 import { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-// import slider1 from "../assets/slider/slider1.png";
-// import slider2 from "../assets/slider/slider2.png";
-// import slider3 from "../assets/slider/slider3.png";
-import slider1 from "../assets/slider1.png"
-import slider2 from "../assets/slider2.png"
-import slider3 from "../assets/slider3.png"
+import slider1 from "../assets/slider1.jpg"
+import slider2 from "../assets/slider2.jpg"
+import slider3 from "../assets/slider3.jpg"
 
 const SLIDER_IMAGES = [slider1, slider2, slider3] as const;
 
