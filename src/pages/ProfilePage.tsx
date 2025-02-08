@@ -21,27 +21,7 @@ interface Order {
   }>;
 }
 
-const mockOrders: Order[] = [
-  {
-    id: "ORD-001",
-    date: "2024-03-15",
-    status: "Delivered",
-    total: 2500,
-    items: [
-      { id: "1", title: "Book 1", quantity: 2, price: 1000 },
-      { id: "2", title: "Book 2", quantity: 1, price: 500 }
-    ]
-  },
-  {
-    id: "ORD-002",
-    date: "2024-03-10",
-    status: "Processing",
-    total: 1500,
-    items: [
-      { id: "3", title: "Book 3", quantity: 1, price: 1500 }
-    ]
-  }
-];
+
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState(0);

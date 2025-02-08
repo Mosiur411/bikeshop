@@ -33,7 +33,7 @@ export default function Footer() {
           <div className="text-center sm:text-left">
             <h2 className="text-xl font-bold mb-4">Bike store</h2>
             <p className="text-gray-400 mb-4 text-sm sm:text-base">
-              Your trusted destination for quality books and stationery products.
+              Your trusted destination for quality bike and stationery products.
             </p>
             <div className="flex justify-center sm:justify-start space-x-4">
               <a href="#" className="transform hover:scale-110 transition-transform">

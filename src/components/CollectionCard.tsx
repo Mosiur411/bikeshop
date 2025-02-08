@@ -1,38 +1,5 @@
-import collection1 from '../assets/bookCollection1.png'
-import collection2 from '../assets/bookCollection4.png'
-import collection3 from '../assets/bookCollection3.png'
 
-interface Collection {
-  id: number;
-  image: string;
-  title: string;
-  description: string;
-  link: string;
-}
 
-const collections: Collection[] = [
-  {
-    id: 1,
-    image: collection1,
-    title: "Academic Books",
-    description: "Find your essential academic materials",
-    link: "/collections/academic"
-  },
-  {
-    id: 2,
-    image: collection2,
-    title: "Story Books",
-    description: "Discover amazing stories",
-    link: "/collections/story"
-  },
-  {
-    id: 3,
-    image: collection3,
-    title: "Stationery",
-    description: "Quality stationery supplies",
-    link: "/collections/stationery"
-  }
-];
 
 export default function CollectionCard() {
   return (
