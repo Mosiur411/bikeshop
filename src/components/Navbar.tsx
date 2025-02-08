@@ -39,8 +39,7 @@ const Navbar = () => {
   const user = localStorage.getItem("email");
 
   const handleLogout = () => {
-    localStorage.removeItem("email");
-    localStorage.removeItem("token");
+    localStorage.clear();
     setShowLogoutModal(false);
     navigate("/login");
   };
@@ -54,7 +53,7 @@ const Navbar = () => {
         </Link>
 
         {/* Search Bar */}
-        <div className="relative hidden md:block">
+       {/*  <div className="relative hidden md:block">
           <input
             type="text"
             placeholder="Search products..."
@@ -65,16 +64,14 @@ const Navbar = () => {
           <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
             <FiSearch size={20} />
           </button>
-        </div>
+        </div> */}
 
         {/* Menu Items */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link to="/products" className="text-gray-600 hover:text-blue-600">
             Products
           </Link>
-          <Link to="/favorite" className="text-gray-600 hover:text-blue-600">
-            Favorite
-          </Link>
+        
           <Link to="/about" className="text-gray-600 hover:text-blue-600">
             About
           </Link>

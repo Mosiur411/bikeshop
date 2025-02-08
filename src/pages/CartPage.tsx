@@ -120,7 +120,7 @@ export default function CartPage() {
 
                   <div className="flex-grow">
                     <h3 className="font-semibold">{item.title}</h3>
-                    <p className="text-gray-600">৳{item.price}</p>
+                    <p className="text-gray-600">${item.price}</p>
 
                     <div className="flex items-center gap-4 mt-2">
                       <div className="flex items-center border rounded-md">
@@ -149,7 +149,7 @@ export default function CartPage() {
                   </div>
 
                   <div className="text-right">
-                    <p className="font-semibold">৳{item.price * item.quantity}</p>
+                    <p className="font-semibold">${item.price * item.quantity}</p>
                   </div>
                 </div>
               ))}
@@ -164,16 +164,13 @@ export default function CartPage() {
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>৳{totalAmount}</span>
+                  <span>${totalAmount}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span>৳50</span>
-                </div>
+              
                 <div className="border-t pt-2 mt-2">
                   <div className="flex justify-between font-semibold">
                     <span>Total</span>
-                    <span>৳{totalAmount + 50}</span>
+                    <span>${totalAmount}</span>
                   </div>
                 </div>
               </div>

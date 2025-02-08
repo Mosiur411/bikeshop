@@ -6,45 +6,46 @@ import { FaChevronLeft, FaChevronRight, FaQuoteLeft } from 'react-icons/fa';
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    role: "Book Lover",
-    avatar: "https://randomuser.me/api/portraits/women/1.jpg",
-    content: "Amazing collection of books! The delivery was quick and the books were in perfect condition.",
+    name: "Rahim Ahmed",
+    role: "Motorbike Enthusiast",
+    avatar: "https://randomuser.me/api/portraits/men/10.jpg",
+    content: "দারুণ বাইকের কালেকশন! দামও সাশ্রয়ী, এবং সার্ভিস ছিল একদম সময়মতো।",
     rating: 5
   },
   {
     id: 2,
-    name: "Michael Chen",
-    role: "Student",
-    avatar: "https://randomuser.me/api/portraits/men/2.jpg",
-    content: "Found all my academic books here. Great prices and excellent customer service!",
+    name: "Ayesha Khan",
+    role: "Daily Commuter",
+    avatar: "https://randomuser.me/api/portraits/women/20.jpg",
+    content: "প্রতিদিন অফিস যাওয়ার জন্য এখান থেকে বাইক নিয়েছি, দুর্দান্ত পারফরম্যান্স!",
     rating: 4
   },
   {
     id: 3,
-    name: "Emma Wilson",
-    role: "Teacher",
-    avatar: "https://randomuser.me/api/portraits/women/3.jpg",
-    content: "The variety of educational materials is impressive. Highly recommended for educators.",
+    name: "Fahim Rahman",
+    role: "Bike Lover",
+    avatar: "https://randomuser.me/api/portraits/men/30.jpg",
+    content: "সেরা বাইক শপ! নতুন মডেল ও এক্সেসরিজের বিশাল কালেকশন আছে।",
     rating: 5
   },
   {
     id: 4,
-    name: "David Brown",
-    role: "Regular Customer",
-    avatar: "https://randomuser.me/api/portraits/men/4.jpg",
-    content: "Been shopping here for years. Never disappointed with the service and quality.",
+    name: "Nusrat Jahan",
+    role: "Touring Rider",
+    avatar: "https://randomuser.me/api/portraits/women/40.jpg",
+    content: "লং রাইডের জন্য এখান থেকে বাইক কিনেছি, এক কথায় অসাধারণ অভিজ্ঞতা!",
     rating: 5
   },
   {
     id: 5,
-    name: "Lisa Anderson",
-    role: "Parent",
-    avatar: "https://randomuser.me/api/portraits/women/5.jpg",
-    content: "Great selection of children's books. My kids love everything we've bought here!",
+    name: "Hasan Ali",
+    role: "Bike Mechanic",
+    avatar: "https://randomuser.me/api/portraits/men/50.jpg",
+    content: "এখানকার বাইক পার্টসের কোয়ালিটি খুব ভালো। নিয়মিত এখান থেকে পার্টস নেই।",
     rating: 4
   }
 ];
+
 
 export default function TestimonialCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(

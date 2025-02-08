@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseApi } from '../../store/baseApi';
 
 
 export const orderApiSlice = createApi({
     reducerPath: 'orderApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://assignment-4-server-blond.vercel.appapi/'
-    }),
+   baseQuery: baseApi,
     tagTypes: ['Order'],
     endpoints: (builder) => ({
         orderCheckout: builder.mutation({
@@ -14,6 +13,7 @@ export const orderApiSlice = createApi({
                 method: 'POST',
                 body: data,
             }),
+            invalidatesTags: ['order'],
         }),
         orderconfirm: builder.mutation({
             query: (data) => ({
@@ -21,11 +21,17 @@ export const orderApiSlice = createApi({
                 method: 'POST',
                 body: data,
             }),
+            invalidatesTags: ['order'],
         }),
+        getOrder: builder.query({
+            query: () => '/order',
+            providesTags: ['order'],
+          }),
     }),
 });
 
 export const {
     useOrderCheckoutMutation,
-    useOrderconfirmMutation
+    useOrderconfirmMutation,
+    useGetOrderQuery
 } = orderApiSlice;

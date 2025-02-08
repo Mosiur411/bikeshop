@@ -1,8 +1,15 @@
+import { clearCart } from "@/feature/cart/cartSlice";
 import { useOrderconfirmMutation } from "@/feature/order/orderSlice";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function StripePaymentFrom({ orderData }) {
-    const [confirmpaymnet, {isLoading, isSuccess}] = useOrderconfirmMutation()
+    const dispatch =useDispatch()
+    const navigate=useNavigate()
+    const [confirmpaymnet, {isLoading, isSuccess,data,error,isError}] = useOrderconfirmMutation()
     const stripe = useStripe();
     const elements = useElements();
     const click = async (e) => {
@@ -26,11 +33,23 @@ export default function StripePaymentFrom({ orderData }) {
                 ...orderData,
                 trxID: paymentIntent?.id
             }
-           await confirmpaymnet(orderCon) 
+        const result =    await confirmpaymnet(orderCon) 
+        console.log('result',result)
         
         }
     }
 
+    useEffect(()=>{
+        if(isSuccess){
+            toast.success(data?.message);
+            dispatch(clearCart())
+            navigate('/profile')
+        }
+        if(isError){
+            toast.error(error?.data?.message);
+        }
+
+    },[isLoading, isSuccess,data])
 
     return (
         <div>

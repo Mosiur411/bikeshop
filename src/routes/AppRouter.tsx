@@ -7,7 +7,6 @@ import CheckoutPage from "@/pages/CheckoutPage";
 import AboutPage from "@/pages/AboutPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import PrivateRoutes from "./PrivateRoutes";
-import FavoriteProductPage from '@/pages/FavoriteProductPage';
 import CartPage from '@/pages/CartPage';
 import LoginPage from '@/pages/LoginPage';
 import RegisterPage from '@/pages/RegisterPage';
@@ -42,10 +41,6 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <CartPage />
-      },
-      {
-        path: '/favorite',
-        element: <FavoriteProductPage />
       },
       {
         path: '/profile',

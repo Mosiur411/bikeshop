@@ -6,7 +6,9 @@ interface Product {
   _id?: string;
   title?: string;
   author?: string;
-  category?: string;
+  category?: {
+    title:string
+  };
   description?: string;
   image?: string;
   inStock?: boolean;
@@ -59,9 +61,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm text-gray-600 mb-2">by {product.author}</p>
         
         <div className="flex items-center justify-between mb-2">
-          <span className="text-gray-500 text-sm">{product.category}</span>
+          <span className="text-gray-500 text-sm">{product.category?.title}</span>
           <span className="text-lg font-bold text-gray-900">
-            ৳{product.price.toLocaleString()}
+            ${product.price.toLocaleString()}
           </span>
         </div>
 
@@ -81,12 +83,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             Add to Cart
           </button>
           
-          <Link 
+         {/*  <Link 
             to={`/product/${product._id}`}
             className="text-blue-600 hover:text-blue-800 text-sm font-medium"
           >
             View Details
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
