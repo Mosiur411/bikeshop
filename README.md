@@ -1,87 +1,76 @@
-# Assignment-3: Blogging Platform Backend
+# User Guide for Bike Shop Application
 
-## Overview
+## Features
 
-I developed a powerful backend for a blogging platform, enabling both user and admin operations with full CRUD functionality, authentication, and authorization. Users can create, read, update, and delete their blogs, while admins have extended privileges to manage all content.
+### 1. **User Authentication**
+- Users can register with **name, email, and password**.
+- Users can **log in** with their email and password.
+- JWT-based authentication for secure access.
+- Logout functionality to clear user session.
 
-Key features include advanced search and filtering for efficient content discovery. The backend is built using Node.js, Express.js, TypeScript, and MongoDB, ensuring scalability, type safety, and high performance. JWT-based authentication secures user sessions, while role-based authorization safeguards resources. Designed with clean architecture and modularity, this backend provides a robust, efficient, and secure foundation for a modern blogging platform.
+### 2. **Product Browsing & Cart Management**
+- Users can browse all available bikes.
+- Search and filter products by **brand, name, category, and price**.
+- Add products to the cart.
+- Remove items from the cart.
 
----
+### 3. **Order Management**
+- Users can place an order from the cart.
+- Users cannot order products that are out of stock.
+- View past orders in the dashboard.
+- Track order status (Pending, Processing, Shipped, Delivered).
 
-## Technology Stack
+### 4. **Payment Integration**
+- Payments are processed via **SurjoPay**.
+- Secure checkout with total price calculation.
+- Users receive order confirmation upon successful payment.
 
-- **TypeScript**
-- **Node.js**
-- **Express.js**
-- **MongoDB** with **Mongoose**
-- **Stripe** 
+## Setup & Installation
 
----
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Mosiur411/bikeshop.git
+   cd bike-shop
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the application:
+   ```bash
+   npm run dev
+   ```
 
-## Features and Functionalities
+## API Endpoints
 
-### 1. User Roles
+### Authentication
+- `POST /api/register` - Register a new user.
+- `POST /api/login` - Authenticate user and return JWT.
+- `POST /api/logout` - Log out user.
 
-#### Admin Capabilities:
-- Admin accounts are created manually with predefined credentials stored in the database.
-- Privileges:
-  - **Remove any blog.**
-  - **Block users** by updating their `isBlocked` status.
-- Restrictions:
-  - **Cannot modify blog content.**
+### Products
+- `GET /api/products` - Fetch all products.
+- `GET /api/products/:id` - Fetch product details.
 
-#### Regular User Capabilities:
-- Can sign up and log in.
-- Privileges:
-  - **Add new blogs** (login required).
-  - **Edit and delete their own blogs.**
-- Restrictions:
-  - **Cannot perform admin-specific actions.**
+### Cart
+- `POST /api/cart/add` - Add product to cart.
+- `GET /api/cart` - Get user's cart items.
+- `DELETE /api/cart/remove/:id` - Remove item from cart.
 
----
+### Orders
+- `POST /api/orders` - Create a new order.
+- `GET /api/orders` - View user orders.
+- `GET /api/orders/:id` - View specific order details.
 
-### 2. Authentication and Role-Based Access Control
+### Payments
+- `POST /api/payments` - Process payment using **Stripe**.
 
-#### Authentication:
-- Login is mandatory for any **create**, **update**, or **delete** operations.
+## Deployment
+- Hosted on **Vercel/DigitalOcean** (update according to deployment method).
+- Ensure **MongoDB connection string** is set in environment variables.
 
-#### Authorization:
-- Differentiation between admin and regular users ensures access control for restricted routes.
-- Protected routes must only allow authorized actions based on the user's role.
+## Live Site
+- [Bike Shop Store](https://bikeshopstore.vercel.app/)
 
----
-
-### 3. Blog API
-
-#### Public Blog API:
-- Accessible endpoint to view blogs with essential information such as title, content, and author details.
-- Features:
-  - **Search:** Find blogs using keywords in titles or content.
-  - **Sort:** Organize blogs by attributes like `createdAt` or `title`, with ascending or descending order.
-  - **Filter:** Retrieve blogs based on criteria like author ID.
-
-#### Admin-Specific Actions:
-- Admins can moderate user-generated content as per their permissions.
-
-#### User-Specific Actions:
-- Users can fully manage blogs they have created while adhering to role-based limitations.
-
-
-## Package use Management 
-1. yarn add -D typescript @types/express @types/node
-2. yarn add -D dotenv
-3. yarn add -D express
-4. yarn add -D @types/mongoose
-4. yarn add -D @types/stripe
-5. yarn add -D ts-node-dev
-## Admin login crediential
-  Email: admin@gmail.com
-  password:  admin@gmail.com
-## Hosting: 
-**My server site hosting use vercel**
-
-## Seen my server site provide infomation
-1. **GitHub Link: https://github.com/Mosiur411/assignment-4-server**
-2. **Live Link : https://assignment-4-server-blond.vercel.app/**
-
+Let me know if you need any modifications or additional details! 🚀
 
