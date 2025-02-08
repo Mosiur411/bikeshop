@@ -58,7 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </h3>
         </Link>
         
-        <p className="text-sm text-gray-600 mb-2">by {product.author}</p>
+        <p className="text-sm text-gray-600 mb-2">{product.author}</p>
         
         <div className="flex items-center justify-between mb-2">
           <span className="text-gray-500 text-sm">{product.category?.title}</span>
